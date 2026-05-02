@@ -1,0 +1,21 @@
+{
+  "name": "shelby-dataset-uploader",
+  "version": "0.1.0",
+  "description": "CLI tool to upload AI training datasets to Shelby decentralized storage",
+  "main": "src/cli.ts",
+  "scripts": {
+    "dev": "ts-node src/cli.ts",
+    "build": "tsc",
+    "upload": "ts-node src/cli.ts upload",
+    "list": "ts-node src/cli.ts list"
+  },
+  "dependencies": {
+    "@shelby-xyz/sdk": "^0.3.1",
+    "@aptos-labs/ts-sdk": "^1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  }
+}
