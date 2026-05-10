@@ -2,33 +2,57 @@
 
 A CLI tool for AI developers to upload and manage training datasets on Shelby decentralized storage.
 
-## Overview
+## Features
 
-shelby-dataset-uploader makes it easy to upload large AI datasets to Shelby. Instead of relying on centralized storage like S3 or GCS, your datasets live on a decentralized network with guaranteed availability and no single point of failure.
+- Upload single files or entire directories to Shelby
+- Auto-generates a manifest.json with all blob IDs
+- Check upload status by blob ID
+- List all previously uploaded datasets
+- Supports any file format (images, text, parquet, CSV, etc.)
+- Chunked uploads for large datasets
 
-## Use cases
+## Why Shelby for AI datasets?
 
-- Upload image datasets for computer vision models
-- Store text corpora for LLM training
-- Archive model checkpoints permanently
-- Share datasets with collaborators via blob IDs
+AI training datasets are large, expensive to store, and critical to preserve. Centralized storage can go down, get expensive, or restrict access. Shelby gives you:
 
-## How it works
+- Permanent decentralized storage
+- No single point of failure
+- Erasure coding for data integrity
+- Pay-per-read model — only pay when data is accessed
 
-1. Point the CLI at a local folder or file
-2. Files are chunked and uploaded to Shelby
-3. A blob ID is returned for each file
-4. Blob IDs are saved to a local manifest.json for reference
+## Usage
 
-## Stack
+Upload a single file:
+node dist/cli.js upload ./dataset.csv
 
-- Shelby TypeScript SDK
-- Node.js CLI
-- Aptos wallet for authentication
+Upload an entire folder:
+node dist/cli.js upload ./my-dataset/
 
-## Status
+List uploaded files:
+node dist/cli.js list
 
-Work in progress — testnet only.
+Check a blob:
+node dist/cli.js status <blob-id>
+
+## Project Structure
+
+shelby-dataset-uploader/
+├── src/
+│   ├── uploader.ts    # core upload logic
+│   └── cli.ts         # CLI interface
+├── package.json
+└── tsconfig.json
+
+## Roadmap
+
+- [x] Single file upload
+- [x] Directory upload
+- [x] Manifest generation
+- [x] CLI interface
+- [ ] Resume interrupted uploads
+- [ ] Progress bar for large files
+- [ ] Dataset versioning
+- [ ] Mainnet support
 
 ## Setup
 
@@ -40,8 +64,6 @@ Set your environment variables in .env:
 SHELBY_RPC=https://rpc.shelby.xyz
 SHELBY_NETWORK=testnet
 
-## Usage
+## Status
 
-node dist/index.js upload ./my-dataset/
-node dist/index.js status <blob-id>
-node dist/index.js list
+Work in progress — testnet only.
